@@ -23,3 +23,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import RegistrationPage from '../support/pageobjects/registrationobjects'
+const login = new RegistrationPage()
+
+Cypress.Commands.add('Login', function (email, password) {
+
+    cy.visit('baseUrl')
+    login.signIn().click()
+    login.signInVerify().should('have.text', 'Authentication')
+    login.email().type(email)
+    login.password().type(password)
+    login.loginButton().click()
+    login.accountName().then(function (el) {
+        let name = el.text()
+        cy.log(name)
+        expect(name).to.equal('Cypress Test')
+    })
+
+})

@@ -1,11 +1,13 @@
 {
 
 "env"   : {
+    "email":"cypress@test.com",
+    "password":"cypresstest"
     
 },
 
 
 "baseUrl": "http://automationpractice.com/index.php",
-"defaultCommandTimeout": 10000
+"defaultCommandTimeout": 15000
 
 }
