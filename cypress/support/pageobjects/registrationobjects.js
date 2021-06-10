@@ -25,8 +25,13 @@ class RegistrationPage {
         return cy.get('.page-heading')
     }
 
-    gender() {
+    gender(gender) {
+        if(gender=='Male'){
         return cy.get('#id_gender1')
+        }
+        else {
+        return cy.get('#id_gender2')
+        }
     }
 
     firstName() {
