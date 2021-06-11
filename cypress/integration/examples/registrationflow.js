@@ -53,7 +53,7 @@ describe('ShoppingSite', function () {
 
             let name = el.text()
             cy.log(name)
-            expect(name).to.equal('First Name LastName')
+            expect(name).to.equal('First Name Last Name')
 
         })
 
