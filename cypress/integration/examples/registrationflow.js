@@ -3,31 +3,22 @@
 import RegistrationPage from '../../support/pageobjects/registrationobjects'
 const registrationPage = new RegistrationPage()
 
+
 describe('ShoppingSite', function () {
 
-before(function () {
-    cy.clearCookies()
-})
-
-beforeEach(function () {
-
-
-    cy.fixture('example').then(function (data) {
-        this.data = data
+    beforeEach(function () {
+        cy.fixture('reg').then(function(data) {
+            this.data = data
+        })
+        let email = Cypress.env('email')
+        let password = Cypress.env('password')
+        cy.log(email,password)
+        cy.Login(email,password)    
     })
+    
 
-    let email = Cypress.env('email')
-    let password = Cypress.env('password')
-    cy.log(email,password)
-    cy.Login(email,password)
+    it('Registration', function () {
 
-})
-
-
-
-    it('Registration', () => {
-
-        // cy.visit('baseUrl')
         registrationPage.signOut().click()
         cy.wait(5000)
         registrationPage.signInVerify().should('have.text', 'Authentication')
@@ -62,12 +53,6 @@ beforeEach(function () {
             expect(name).to.equal('FirstName LastName')
 
         })
-
-
-
-
-
-
 
     })
 
