@@ -7,22 +7,25 @@ const registrationPage = new RegistrationPage()
 describe('ShoppingSite', function () {
 
     beforeEach(function () {
-        cy.fixture('reg').then(function(data) {
+        cy.fixture('reg').then(function (data) {
             this.data = data
         })
         let email = Cypress.env('email')
         let password = Cypress.env('password')
-        cy.log(email,password)
-        cy.Login(email,password)    
+        cy.log(email, password)
+        cy.Login(email, password)
     })
-    
+
 
     it('Registration', function () {
 
         registrationPage.signOut().click()
         cy.wait(5000)
         registrationPage.signInVerify().should('have.text', 'Authentication')
-        registrationPage.newEmailAddress().type(this.data.newEmail)
+        // registrationPage.newEmailAddress().type(this.data.newEmail)
+        cy.form(9).then(function(el){
+            registrationPage.newEmailAddress().type(el+ "@test.com")
+        })
         registrationPage.createNewEmail().click()
         registrationPage.VeirfyNewEmailPage().should('have.text', 'Create an account')
         registrationPage.gender(this.data.gender).click()
@@ -50,7 +53,7 @@ describe('ShoppingSite', function () {
 
             let name = el.text()
             cy.log(name)
-            expect(name).to.equal('FirstName LastName')
+            expect(name).to.equal('First Name LastName')
 
         })
 
