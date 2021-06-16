@@ -1,14 +1,10 @@
 {
-
-"env"   : {
-    "email":"cypress@test.com",
-    "password":"cypresstest"
-    
-},
-
-
-"baseUrl": "http://automationpractice.com/index.php",
-"defaultCommandTimeout": 15000,
-"failOnStatusCode": false
-
+  "env": {
+    "email": "cypress@test.com",
+    "password": "cypresstest"
+  },
+  "baseUrl": "http://automationpractice.com/index.php",
+  "defaultCommandTimeout": 15000,
+  "failOnStatusCode": false,
+  "projectId": "a9ymhe"
 }
