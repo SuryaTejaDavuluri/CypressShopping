@@ -8,6 +8,7 @@
 
 
 "baseUrl": "http://automationpractice.com/index.php",
-"defaultCommandTimeout": 15000
+"defaultCommandTimeout": 15000,
+"failOnStatusCode": false
 
 }

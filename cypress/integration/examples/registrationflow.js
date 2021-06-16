@@ -10,21 +10,20 @@ describe('ShoppingSite', function () {
         cy.fixture('reg').then(function (data) {
             this.data = data
         })
-        let email = Cypress.env('email')
-        let password = Cypress.env('password')
-        cy.log(email, password)
-        cy.Login(email, password)
+        
+
     })
 
 
-    it('Registration', function () {
-
-        registrationPage.signOut().click()
-        cy.wait(5000)
+    it('Registration1', function () {
+        cy.visit('baseUrl')
+        // registrationPage.signOut().click()
+        registrationPage.signIn().click()
+        // cy.wait(5000)
         registrationPage.signInVerify().should('have.text', 'Authentication')
         // registrationPage.newEmailAddress().type(this.data.newEmail)
-        cy.form(9).then(function(el){
-            registrationPage.newEmailAddress().type(el+ "@test.com")
+        cy.form(9).then(function (el) {
+            registrationPage.newEmailAddress().type(el + "@test.com")
         })
         registrationPage.createNewEmail().click()
         registrationPage.VeirfyNewEmailPage().should('have.text', 'Create an account')
@@ -40,6 +39,9 @@ describe('ShoppingSite', function () {
         registrationPage.addressFirstName().type(this.data.firstname1)
         registrationPage.addressLastName().type(this.data.lastname1)
         registrationPage.company().type(this.data.company)
+    })
+
+    it('Registration2', function () {
         registrationPage.address1().type(this.data.address1)
         registrationPage.address2().type(this.data.address2)
         registrationPage.city().type(this.data.city)

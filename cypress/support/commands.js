@@ -29,12 +29,26 @@ const login = new RegistrationPage()
 
 Cypress.Commands.add('Login', function (email, password) {
 
-    cy.visit('baseUrl')
+    // cy.visit('baseUrl')
     login.signIn().click()
+    let title = cy.title()
+    this.title = title
+    if (this.title == " 508 Resource Limit Is Reached") {
+        // cy.go('back')
+        // cy.visit('http://automationpractice.com/index.php?')
+        cy.reload()
+        login.signIn().click()
+    }
     login.signInVerify().should('have.text', 'Authentication')
     login.email().type(email)
     login.password().type(password)
     login.loginButton().click()
+    if (this.title == " 508 Resource Limit Is Reached") {
+        // cy.go('back')
+        // cy.visit('http://automationpractice.com/index.php?')
+        cy.reload()
+        login.loginButton().click()
+    }
     login.accountName().then(function (el) {
         let name = el.text()
         cy.log(name)
