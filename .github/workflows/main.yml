@@ -13,5 +13,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2.9.7
         with:
-          build: npx cypress run -- spec 'cypress\integration\examples\*.js'
+          build: npx cypress run --record --key 8f8dfec2-7a48-4ec9-a107-fec43c300647 -- spec 'cypress\integration\examples\*.js'
           start: npm start

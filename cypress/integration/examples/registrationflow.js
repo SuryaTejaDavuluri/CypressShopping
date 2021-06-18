@@ -3,23 +3,22 @@
 import RegistrationPage from '../../support/pageobjects/registrationobjects'
 const registrationPage = new RegistrationPage()
 
+before(function () {
+    cy.fixture('reg').then(function (data) {
+        this.data = data
+    })
+
+    cy.clearCookies()
+    cy.visit('baseUrl', { failOnStatusCode: false })
+    cy.Refresh()
+
+})
 
 describe('ShoppingSite', function () {
 
-    beforeEach(function () {
-        cy.fixture('reg').then(function (data) {
-            this.data = data
-        })
-        
-
-    })
-
-
     it('Registration1', function () {
-        cy.visit('baseUrl')
-        // registrationPage.signOut().click()
+
         registrationPage.signIn().click()
-        // cy.wait(5000)
         registrationPage.signInVerify().should('have.text', 'Authentication')
         // registrationPage.newEmailAddress().type(this.data.newEmail)
         cy.form(9).then(function (el) {

@@ -30,25 +30,30 @@ const login = new RegistrationPage()
 Cypress.Commands.add('Login', function (email, password) {
 
     // cy.visit('baseUrl')
-    login.signIn().click()
-    let title = cy.title()
-    this.title = title
-    if (this.title == " 508 Resource Limit Is Reached") {
-        // cy.go('back')
-        // cy.visit('http://automationpractice.com/index.php?')
-        cy.reload()
+    // login.signIn().click()
+    cy.title().then(function (head) {
+     cy.log(head)
+       while(head.includes('Limit')) {
+        cy.reload(true)
         login.signIn().click()
-    }
+    } 
+    login.signIn().click()
+            
+        
+    })
+       
     login.signInVerify().should('have.text', 'Authentication')
     login.email().type(email)
     login.password().type(password)
     login.loginButton().click()
-    if (this.title == " 508 Resource Limit Is Reached") {
-        // cy.go('back')
-        // cy.visit('http://automationpractice.com/index.php?')
-        cy.reload()
-        login.loginButton().click()
-    }
+    cy.title().then(function (title) {
+        cy.wait(2000)
+        cy.log(title)
+            while(title.includes("508")) {
+                cy.reload(true)
+            }
+            // login.loginButton().click()
+    })
     login.accountName().then(function (el) {
         let name = el.text()
         cy.log(name)
@@ -71,5 +76,17 @@ Cypress.Commands.add('form', function(size) {
    }
    
    return makeid(size)
+
+})
+
+
+Cypress.Commands.add('Refresh', function() {
+
+    cy.title().then(function (title) {
+        cy.log(title)
+        if (title.includes("508")) {
+            cy.reload(true)
+        }
+    })
 
 })

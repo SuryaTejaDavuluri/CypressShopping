@@ -18,3 +18,7 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Cypress.Cookies.defaults({
+//     preserve: 'PrestaShop-a30a9934ef476d11b6cc3c983616e364',
+//   })
